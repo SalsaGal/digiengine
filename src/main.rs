@@ -21,6 +21,7 @@ struct Digiengine {
 impl Game for Digiengine {
     fn init(data: &mut GameData) -> Self {
         data.graphics.frame_size = Some((2.0, 2.0).into());
+        data.graphics.background_color = wgpu::Color::WHITE;
 
         let args = Args::parse();
         let system_config = std::fs::read_to_string(&args.config).unwrap();
@@ -28,11 +29,8 @@ impl Game for Digiengine {
 
         dbg!(&system);
 
-        Self {
-            system,
-        }
+        Self { system }
     }
 
-    fn render<'a>(&'a mut self, _: graphics::Frame<'a>) {
-    }
+    fn render<'a>(&'a mut self, _: graphics::Frame<'a>) {}
 }

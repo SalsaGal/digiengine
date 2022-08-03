@@ -660,6 +660,7 @@ dependencies = [
  "current",
  "serde",
  "serde_json",
+ "wgpu",
 ]
 
 [[package]]
