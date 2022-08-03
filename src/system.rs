@@ -1,7 +1,6 @@
-pub struct System {}
+use serde::Deserialize;
 
-impl System {
-    pub fn test() -> Self {
-        Self {}
-    }
+#[derive(Deserialize)]
+pub struct System {
+    pub test: u8,
 }
