@@ -1,6 +1,6 @@
 use serde::Deserialize;
 
-#[derive(Deserialize)]
+#[derive(Debug, Deserialize)]
 pub struct System {
-    pub test: u8,
+    pub stages: Vec<String>,
 }

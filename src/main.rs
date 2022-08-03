@@ -24,9 +24,12 @@ impl Game for Digiengine {
 
         let args = Args::parse();
         let system_config = std::fs::read_to_string(&args.config).unwrap();
+        let system = serde_json::from_str(&system_config).unwrap();
+
+        dbg!(&system);
 
         Self {
-            system: serde_json::from_str(&system_config).unwrap(),
+            system,
         }
     }
 

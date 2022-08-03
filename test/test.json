@@ -1,1 +1,9 @@
-{"test" : 4}
+{
+    "stages": [
+        "Baby I",
+        "Baby II",
+        "Child",
+        "Adult",
+        "Perfect"
+    ]
+}
