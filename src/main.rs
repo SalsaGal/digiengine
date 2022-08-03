@@ -2,8 +2,13 @@ mod system;
 
 use crate::system::System;
 
+use clap::Parser;
 use current::*;
-use serde::Deserialize;
+
+#[derive(Parser)]
+struct Args {
+    config: String,
+}
 
 fn main() {
     Digiengine::run();
@@ -16,9 +21,15 @@ struct Digiengine {
 impl Game for Digiengine {
     fn init(data: &mut GameData) -> Self {
         data.graphics.frame_size = Some((2.0, 2.0).into());
-        let system_data = r#"{ "test": 5 }"#;
+
+        let args = Args::parse();
+        let system_config = std::fs::read_to_string(&args.config).unwrap();
+
         Self {
-            system: serde_json::from_str(system_data).unwrap(),
+            system: serde_json::from_str(&system_config).unwrap(),
         }
+    }
+
+    fn render<'a>(&'a mut self, _: graphics::Frame<'a>) {
     }
 }
