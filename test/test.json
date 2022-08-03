@@ -6,5 +6,15 @@
         "Child",
         "Adult",
         "Perfect"
+    ],
+    "creatures": [
+        {
+            "name": "Botamon",
+            "stage": 0
+        },
+        {
+            "name": "Koromon",
+            "stage": 1
+        }
     ]
 }
