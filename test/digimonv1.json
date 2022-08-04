@@ -16,5 +16,6 @@
             "name": "Koromon",
             "stage": 1
         }
-    ]
+    ],
+    "background": "background.png"
 }
