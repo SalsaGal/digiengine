@@ -1,6 +1,9 @@
 [default]
 cargo run -- test/test.json
 
+[h]
+cargo run -- --help
+
 [check]
 cargo fmt
 cargo clippy
