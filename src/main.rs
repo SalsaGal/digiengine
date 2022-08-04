@@ -26,7 +26,7 @@ fn main() {
 }
 
 struct Digiengine {
-    save: Save,
+    save: Option<Save>,
     system: System,
 }
 
@@ -55,14 +55,18 @@ impl Game for Digiengine {
             dir
         };
         let save_contents = std::fs::read_to_string(save_path).unwrap();
-        let save = serde_json::from_str(&save_contents).unwrap();
+        let save = if let Ok(save) = serde_json::from_str(&save_contents) {
+            Some(save)
+        } else {
+            None
+        };
 
         dbg!(&system);
         dbg!(&save);
 
         Self {
             save,
-            system
+            system,
         }
     }
 
