@@ -1,19 +1,16 @@
 {
-    "name": "Digital Monster Ver. 1",
+    "name": "Test System",
     "stages": [
-        "Baby I",
-        "Baby II",
-        "Child",
-        "Adult",
-        "Perfect"
+        "Stage 1",
+        "Stage 2"
     ],
     "creatures": [
         {
-            "name": "Botamon",
+            "name": "Stage 1 creature",
             "stage": 0
         },
         {
-            "name": "Koromon",
+            "name": "Stage 2 creature",
             "stage": 1
         }
     ],
