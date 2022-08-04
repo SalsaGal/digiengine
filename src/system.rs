@@ -9,6 +9,6 @@ pub struct System {
 
 #[derive(Debug, Deserialize)]
 pub struct Creature {
-    name: String,
-    stage: usize,
+    pub name: String,
+    pub stage: usize,
 }
