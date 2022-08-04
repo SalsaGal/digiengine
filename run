@@ -1,5 +1,5 @@
 [default]
-cargo run -- test/test.json
+cargo run -- test/test.json -s test/save.json
 
 [h]
 cargo run -- --help
