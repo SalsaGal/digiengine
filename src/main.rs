@@ -1,7 +1,7 @@
 mod save;
 mod system;
 
-use std::path::PathBuf;
+use std::fs::read_to_string;
 
 use crate::system::System;
 
@@ -11,14 +11,8 @@ use save::Save;
 
 #[derive(Parser)]
 struct Args {
-    /// The configuration file to read system information from
-    config: String,
-    /// The working directory to find system folders
-    #[clap(long = "pwd")]
-    working_dir: Option<String>,
-    /// The path of the save data
-    #[clap(short = 's', long = "save")]
-    save: Option<String>,
+    /// Location of system folder
+    system_path: String,
 }
 
 fn main() {
@@ -37,26 +31,11 @@ impl Game for Digiengine {
 
         let args = Args::parse();
 
-        if let Some(dir) = args.working_dir {
-            std::env::set_current_dir(dir).expect("Invalid working directory: {dir}");
-        } else if !cfg!(debug_assertions) {
-            let dir = std::env::current_exe().unwrap();
-            std::env::set_current_dir(dir).unwrap();
-        }
+        std::env::set_current_dir(args.system_path).unwrap();
 
-        let system_config = std::fs::read_to_string(&args.config).unwrap();
-        let system = serde_json::from_str(&system_config).unwrap();
-
-        let save_path = if let Some(path) = args.save {
-            PathBuf::from(path)
-        } else {
-            let mut dir = std::env::current_exe().unwrap();
-            dir.push("save.json");
-            dir
-        };
-        let save_contents = std::fs::read_to_string(save_path).unwrap();
-        let save = if let Ok(save) = serde_json::from_str(&save_contents) {
-            Some(save)
+        let system = serde_json::from_str(&read_to_string("system.json").unwrap()).unwrap();
+        let save = if let Ok(contents) = read_to_string("save.json") {
+            Some(serde_json::from_str(&contents).unwrap())
         } else {
             None
         };
@@ -69,6 +48,4 @@ impl Game for Digiengine {
             system,
         }
     }
-
-    fn render<'a>(&'a mut self, _: graphics::Frame<'a>) {}
 }

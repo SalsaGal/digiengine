@@ -1,5 +1,5 @@
 [default]
-cargo run -- digimonv1.json -s save.json --pwd test
+cargo run -- test
 
 [h]
 cargo run -- --help
