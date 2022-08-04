@@ -13,6 +13,8 @@ use save::Save;
 struct Args {
     /// Location of system folder
     system_path: String,
+    /// Alternative save file location (save.json in the system folder by default)
+    save_path: Option<String>,
 }
 
 fn main() {
@@ -34,7 +36,8 @@ impl Game for Digiengine {
         std::env::set_current_dir(args.system_path).unwrap();
 
         let system = serde_json::from_str(&read_to_string("system.json").unwrap()).unwrap();
-        let save = if let Ok(contents) = read_to_string("save.json") {
+        let save_path = args.save_path.unwrap_or_else(|| "save.json".to_owned());
+        let save = if let Ok(contents) = read_to_string(save_path) {
             Some(serde_json::from_str(&contents).unwrap())
         } else {
             None
@@ -43,9 +46,6 @@ impl Game for Digiengine {
         dbg!(&system);
         dbg!(&save);
 
-        Self {
-            save,
-            system,
-        }
+        Self { save, system }
     }
 }
